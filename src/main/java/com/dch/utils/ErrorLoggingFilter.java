@@ -37,11 +37,10 @@ public class ErrorLoggingFilter implements Filter{
 
     @Override
     public void init(FilterConfig filterConfig) {
-        // TODO
+
     }
 
     @Override
     public void destroy() {
-        // TODO
     }
 }

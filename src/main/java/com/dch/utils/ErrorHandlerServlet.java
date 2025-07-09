@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@SuppressWarnings("unchecked")
 @WebServlet("/error-handler")
 public class ErrorHandlerServlet extends HttpServlet{
 	private static final Logger log = LoggerFactory.getLogger(ErrorHandlerServlet.class);

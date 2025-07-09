@@ -9,14 +9,14 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="${pageContext.request.contextPath}/index.jsp">Tenis-score-board</a>
+  <a class="navbar-brand" href="${pageContext.request.contextPath}/home.jsp">Tenis-score-board</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="${pageContext.request.contextPath}/index.jsp">Home</span></a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/home.jsp">Home</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="${pageContext.request.contextPath}/arhive.jsp">Matches</a>
@@ -25,13 +25,6 @@
   </div>
  
 </nav>
- <div class="centered-container">
-	<a href="${pageContext.request.contextPath}/create-match.jsp">
-	  <button>Create math</button>
-	</a>
-	<a href="${pageContext.request.contextPath}/arhive.jsp">
-	  <button>Mathes arhive</button>
-	</a>
-  </div>
+ 
 </body>
 </html>
