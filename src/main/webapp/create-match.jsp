@@ -54,16 +54,19 @@
 </head>
 <body>
 	<jsp:include page="header.jsp" />
+    <c:if test="${not empty errorMessage}">
+        <p style="color:red;">${errorMessage}</p>
+    </c:if>
 	<div class="container">
         <h2>Create new match</h2>
         <form action="${pageContext.request.contextPath}/new-match" method="POST">
             <div class="form-group">
                 <label for="player1Name">Name player 1:</label>
-                <input type="text" id="player1Name" name="player1Name" required>
+                <input type="text" id="player1Name" name="player-one-name" required>
             </div>
             <div class="form-group">
                 <label for="player2Name">Name player 2:</label>
-                <input type="text" id="player2Name" name="player2Name" required>
+                <input type="text" id="player2Name" name="player-two-name" required>
             </div>
             <button type="submit">Starn game</button>
         </form>

@@ -11,9 +11,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dch.repository.PlayerRepository;
+import com.dch.service.OngoingMatchesService;
+import com.dch.utils.JpaUtil;
+import com.dch.utils.TransactionHelper;
+
+import jakarta.persistence.EntityManagerFactory;
+
 @SuppressWarnings("unchecked")
 @WebServlet("/new-match")
 public class NewMatchServlet extends HttpServlet{
+
+	private OngoingMatchesService ongoingMatchesService;
+
+    @Override
+    public void init() {
+		EntityManagerFactory emf = JpaUtil.getEntityManagerFactory();
+		TransactionHelper transactionHelper = new TransactionHelper(emf);
+		PlayerRepository playerRepository = new PlayerRepository(transactionHelper, emf);
+        this.ongoingMatchesService = new OngoingMatchesService(playerRepository);
+    }
 
 	@Override
 	protected void doGet(
@@ -31,9 +48,20 @@ public class NewMatchServlet extends HttpServlet{
 		throws ServletException, IOException {
 
 			String uuid = String.valueOf(UUID.randomUUID());
-			// get user names form parameter
+
+			String playerOneName = request.getParameter("player-one-name");
+			String playerTwoName = request.getParameter("player-two-name");
+	
+			if (playerOneName.equalsIgnoreCase(playerTwoName)) {
+				request.setAttribute(
+					"errorMessage", "Игроки не могут быть одинаковыми");
+				request.getRequestDispatcher("/create-match.jsp").forward(request, response);
+				return;
+			}
+
 			// logic create current match object
-			// перенаправить на отображение таблицы
+			ongoingMatchesService.createMatch(playerOneName, playerTwoName);
+			
 			String path = request.getContextPath() + "/match-score";
 			String redirectURL = path + "?match_id=" + uuid;
 			response.sendRedirect(redirectURL);
