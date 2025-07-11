@@ -4,6 +4,6 @@ package com.dch.service;
 /**
  * чтение и запись законченных матчей
  */
-public class FinisjMatchesPersistenseService{
+public class FinishMatchesPersistenseService{
 	
 }

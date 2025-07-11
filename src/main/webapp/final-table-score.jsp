@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Table score mather</title>
+    <title>Match result</title>
     <style>
         table {
             border-collapse: collapse;
@@ -26,8 +26,8 @@
 </head>
 <body>
 <jsp:include page="header.jsp" />
+<h1>Final score table</h1>
 <table>
-    <caption>Score match: <%= request.getAttribute("first-name") %> vs <%= request.getAttribute("last-name") %></caption>
     <tr>
         <th>Player</th>
         <th>Sets</th>
@@ -39,26 +39,12 @@
         <td><%= request.getAttribute("sets-score-first") %></td>
         <td><%= request.getAttribute("games-score-first") %></td>
         <td><%= request.getAttribute("points-score-first") %></td>
-		<td>
-            <form method="post" action="${pageContext.request.contextPath}/match-score">
-                <input type="hidden" name="match_id" value="<%= request.getParameter("match_id") %>" />
-                <input type="hidden" name="username" value="<%= request.getAttribute("first-name") %>" />
-                <button type="submit">➕ Point</button>
-            </form>
-        </td>
     </tr>
     <tr>
         <td><%= request.getAttribute("last-name") %></td>
         <td><%= request.getAttribute("sets-score-last") %></td>
         <td><%= request.getAttribute("games-score-last") %></td>
         <td><%= request.getAttribute("points-score-last") %></td>
-		<td>
-            <form method="post" action="${pageContext.request.contextPath}/match-score">
-                <input type="hidden" name="match_id" value="<%= request.getParameter("match_id") %>" />
-                <input type="hidden" name="username" value="<%= request.getAttribute("last-name") %>" />
-                <button type="submit">➕ Point</button>
-            </form>
-        </td>
     </tr>
 </table>
 

@@ -1,7 +1,6 @@
 package com.dch.servlet;
 
 import java.io.IOException;
-import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -47,8 +46,6 @@ public class NewMatchServlet extends HttpServlet{
         HttpServletRequest request, HttpServletResponse response) 
 		throws ServletException, IOException {
 
-			String uuid = String.valueOf(UUID.randomUUID());
-
 			String playerOneName = request.getParameter("player-one-name");
 			String playerTwoName = request.getParameter("player-two-name");
 	
@@ -60,7 +57,7 @@ public class NewMatchServlet extends HttpServlet{
 			}
 
 			// logic create current match object
-			ongoingMatchesService.createMatch(playerOneName, playerTwoName);
+			String uuid = ongoingMatchesService.createMatch(playerOneName, playerTwoName);
 			
 			String path = request.getContextPath() + "/match-score";
 			String redirectURL = path + "?match_id=" + uuid;
