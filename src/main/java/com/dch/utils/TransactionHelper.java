@@ -14,7 +14,7 @@ public class TransactionHelper {
 		this.emf = emf;
 	}
 
-	 public void executeInTransaction(Consumer<EntityManager> action) {
+	public void executeInTransaction(Consumer<EntityManager> action) {
         EntityManager em = null;
         EntityTransaction transaction = null;
 

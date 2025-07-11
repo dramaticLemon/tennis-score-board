@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.dch.repository.MatchRepository;
 import com.dch.repository.PlayerRepository;
+import com.dch.service.FinishMatchesPersistenseService;
 import com.dch.service.OngoingMatchesService;
 import com.dch.service.calculate.score.logic.CurrentMatch;
 import com.dch.service.calculate.score.logic.GameEvent;
@@ -23,18 +25,30 @@ import com.dch.utils.TransactionHelper;
 
 import jakarta.persistence.EntityManagerFactory;
 
-@SuppressWarnings("unchecked")
+
 @WebServlet("/match-score")
 public class MatchScoreServlet extends HttpServlet {
 	private OngoingMatchesService ongoingMatchesService;
+	private FinishMatchesPersistenseService finishMatchesPersistenseService;
 	private static final Logger log = LoggerFactory.getLogger(MatchScoreServlet.class);
 
     @Override
     public void init() {
-        EntityManagerFactory emf = JpaUtil.getEntityManagerFactory();
+
+        EntityManagerFactory emf = JpaUtil.getTennisEntityManagerFactory();
+		EntityManagerFactory efmArchive = JpaUtil.getArchiveEntityManagerFactory();
+
 		TransactionHelper transactionHelper = new TransactionHelper(emf);
+		TransactionHelper arhTransactionHelper = new TransactionHelper(efmArchive);
+
 		PlayerRepository playerRepository = new PlayerRepository(transactionHelper, emf);
+		PlayerRepository arhPlayerRepository = new PlayerRepository(arhTransactionHelper, efmArchive);
+
+		MatchRepository matchRepository = new MatchRepository(arhTransactionHelper, efmArchive);
+
         this.ongoingMatchesService = new OngoingMatchesService(playerRepository);
+		this.finishMatchesPersistenseService = new FinishMatchesPersistenseService(
+			arhTransactionHelper, efmArchive, arhPlayerRepository, matchRepository);
     }
     
 
@@ -84,6 +98,19 @@ public class MatchScoreServlet extends HttpServlet {
 				request.setAttribute("games-score-last", currentMatch.getPlayerTwoGameScore());
 				request.setAttribute("points-score-first", currentMatch.getPlayerOnePointScore());
 				request.setAttribute("points-score-last", currentMatch.getPlayerTwoPointScore());
+				request.setAttribute("winGame", name);
+
+
+				System.out.println("Current match first-name is " + currentMatch.getFirstName());
+				System.out.println("Current match last-name is " + currentMatch.getLastName());
+
+
+
+				finishMatchesPersistenseService.saveMatch(
+					currentMatch.getFirstName(),
+					currentMatch.getLastName(),
+					name
+					);
 
 				RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(finishPath);
 			requestDispatcher.forward(request, response);

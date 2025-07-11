@@ -5,7 +5,7 @@ import com.dch.service.calculate.score.logic.enums.MatchResult;
 
 public class SetScore implements Scorable{
 	private int setsWon = 0;
-	 private static final int SETS_TO_WIN_MATCH = 2;
+	 private static final int SETS_TO_WIN_MATCH = 3;
 
 	@Override
 	public void add() {

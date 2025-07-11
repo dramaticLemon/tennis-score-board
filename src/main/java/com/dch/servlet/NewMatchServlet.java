@@ -25,7 +25,7 @@ public class NewMatchServlet extends HttpServlet{
 
     @Override
     public void init() {
-		EntityManagerFactory emf = JpaUtil.getEntityManagerFactory();
+		EntityManagerFactory emf = JpaUtil.getTennisEntityManagerFactory();
 		TransactionHelper transactionHelper = new TransactionHelper(emf);
 		PlayerRepository playerRepository = new PlayerRepository(transactionHelper, emf);
         this.ongoingMatchesService = new OngoingMatchesService(playerRepository);
@@ -37,6 +37,9 @@ public class NewMatchServlet extends HttpServlet{
 		throws ServletException, IOException {
 			String path = "/create-match.jsp";
 			ServletContext servletContext = getServletContext();
+			response.setContentType("text/html;charset=UTF-8");
+    		request.setCharacterEncoding("UTF-8");
+
 			RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(path);
 			requestDispatcher.forward(request, response);
 	}

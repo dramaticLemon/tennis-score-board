@@ -36,4 +36,18 @@ public class Match {
 		this.omega = player2;
 		this.winner = winner;
 	}
+
+
+	public Player getAlfa() {
+		return alfa;
+	}
+
+	public Player getOmega() {
+		return omega;
+	}
+
+	public Player getWinner() {
+		return winner;
+	}
+	
 }

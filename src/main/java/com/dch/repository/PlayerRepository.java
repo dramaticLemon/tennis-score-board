@@ -33,7 +33,7 @@ public class PlayerRepository {
 		});
 	}
 
-	private Player create(Player player) {
+	public Player create(Player player) {
 		return transactionHelper.executeInTransaction(emf -> {
 			emf.persist(player);
 
