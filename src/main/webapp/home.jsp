@@ -12,7 +12,7 @@
 	<a href="${pageContext.request.contextPath}/new-match">
 	  <button>Create math</button>
 	</a>
-	<a href="${pageContext.request.contextPath}/arhive.jsp">
+	<a href="${pageContext.request.contextPath}/mathes">
 	  <button>Mathes arhive</button>
 	</a>
   </div>

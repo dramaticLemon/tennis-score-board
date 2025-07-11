@@ -19,7 +19,7 @@
         <a class="nav-link" href="${pageContext.request.contextPath}/home.jsp">Home</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="${pageContext.request.contextPath}/arhive.jsp">Matches</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/mathes">Matches</a>
       </li>
     </ul>
   </div>
