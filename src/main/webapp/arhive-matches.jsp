@@ -144,5 +144,31 @@
         </div>
     </div>
 
+
+    <div style="text-align: center; margin-top: 20px;">
+    <c:if test="${totalPages > 1}">
+        <c:if test="${currentPage > 1}">
+            <a href="?page=${currentPage - 1}">&laquo; Previous</a>
+        </c:if>
+
+        <c:forEach begin="1" end="${totalPages}" var="p">
+            <c:choose>
+                <c:when test="${p == currentPage}">
+                    <strong>[${p}]</strong>
+                </c:when>
+                <c:otherwise>
+                    <a href="?page=${p}">${p}</a>
+                </c:otherwise>
+            </c:choose>
+            &nbsp;
+            </c:forEach>
+
+            <c:if test="${currentPage < totalPages}">
+                <a href="?page=${currentPage + 1}">Next &raquo;</a>
+            </c:if>
+        </c:if>
+    </div>
+
+
 </body>
 </html>
